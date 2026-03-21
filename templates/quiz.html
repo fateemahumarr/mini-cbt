@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card quiz-card">
+    <div class="progress-bar-container">
+        <div class="progress-bar" style="width: {{ progress }}%;"></div>
+    </div>
+    
+    <div class="question-header">
+        <h2>Question {{ current_q_number }} of {{ total_q }}</h2>
+    </div>
+
+    <div class="question-body">
+        <p class="question-text">{{ question.text }}</p>
+        
+        <form action="{{ url_for('quiz') }}" method="POST" class="quiz-form">
+            <div class="options-container">
+                {% for option in question.options %}
+                <label class="option-label">
+                    <input type="radio" name="answer" value="{{ option }}" required>
+                    <span class="custom-radio"></span>
+                    <span class="option-text">{{ option }}</span>
+                </label>
+                {% endfor %}
+            </div>
+            
+            <button type="submit" class="btn primary-btn">
+                {{ "Submit & Finish" if is_last else "Next Question" }}
+            </button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
