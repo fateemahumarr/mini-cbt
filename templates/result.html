@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card result-card">
+    <div class="result-header">
+        <h2>Assessment Complete!</h2>
+    </div>
+
+    <div class="score-container">
+        <div class="score-circle">
+            <span class="score-number">{{ score }}</span>
+            <span class="score-total">/ {{ total_points }}</span>
+        </div>
+        <p class="score-message">
+            {% if score == total_points %}
+                Perfect Score! Amazing job! 🌟
+            {% elif score >= (total_points * 0.7) %}
+                Great work! You passed! 🎉
+            {% else %}
+                Good effort! Try again to improve! 💪
+            {% endif %}
+        </p>
+    </div>
+
+    <div class="result-details">
+        <div class="detail-item">
+            <span class="detail-label">Questions Answered:</span>
+            <span class="detail-value">{{ total_questions }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Completion Time:</span>
+            <span class="detail-value timestamp">{{ timestamp }}</span>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="{{ url_for('home') }}" class="btn secondary-btn">Take Quiz Again</a>
+    </div>
+
+</div>
+
+
+{% endblock %}
